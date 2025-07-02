@@ -1,11 +1,10 @@
-# Use OpenJDK 8 as base
 FROM openjdk:8
 
-# Create working directory
+# Create app directory inside container
 WORKDIR /app
 
-# Copy JAR from local system into image
+# Copy the JAR file into the container
 COPY taxi-booking/target/taxi-booking-1.0-SNAPSHOT.jar app.jar
 
-# Run the application
+# Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]
