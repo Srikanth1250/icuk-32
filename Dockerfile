@@ -1,10 +1,12 @@
-FROM openjdk:8
+FROM tomcat:9.0-jdk8-openjdk
 
-# Create app directory inside container
-WORKDIR /app
+# Remove default apps (optional)
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy the JAR file into the container
-COPY taxi-booking/target/taxi-booking-1.0-SNAPSHOT.jar app.jar
+# Copy WAR into Tomcat's webapps directory
+COPY target/java-maven-calculator-web-app-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Expose default Tomcat port
+EXPOSE 8080
+
+# Tomcat starts automatically
